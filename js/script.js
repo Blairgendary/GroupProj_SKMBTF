@@ -2,11 +2,10 @@
 
 
 
-/////////////////////THESE VARIABLES WILL LET
 
-// this is to get the favorite count
+	// this is to get the favorite count
 var favCount;
-
+var xhr = new XMLHttpRequest();
 //this is to get the colors of the them 
 // this is the profile link color
 var profileLinkColor;
@@ -15,39 +14,38 @@ var redcol;
 var greencol;
 var bluecol;
 
+var r, g, b;
+
+
 var canvas;
+
+//this will be initializing all of the sprites n shit
+var bird;
+var birdImage;
+
 
 
 //this is the bottom rectangle sprite for stuff to sit on
 
 var bottomRect;
 var mouseCollideCircle;
-function centerCanvas(){
-	var x = (windowWidth - width) / 2;
-	var y = (windowHeight - height) / 2;
-	canvas.position(x,y);
+
+var colorarray = [];
 
 
-}
 
 
 function setup(){
-
-	canvas = createCanvas(1000,1000);
-	centerCanvas();
+	var divWidth = document.getElementById('myCanvas').offsetWidth;
+	var divHeight = document.getElementById('myCanvas').offsetHeight;
+	canvas = createCanvas(divWidth,divHeight);
+	canvas.parent("myCanvas");
+	colorMode(RGB,255);
+	// centerCanvas();
 	background(200);
-	mouseCollideCircle = createSprite(30,30,30,30);
-	mouseCollideCircle.setCollider("rectangle",0,0,30,30);
-	mouseCollideCircle.debug = true;
-	
-	bottomRect = createSprite(500,900,1000,300);
-	bottomRect.setCollider("rectangle",0,0,1000,300);
-	bottomRect.debug = true;
-	
-  	
-	console.log("yes");
 
-	var xhr = new XMLHttpRequest();
+
+
 
 
 	
@@ -72,7 +70,7 @@ function setup(){
 
 			
 			
-			//the substing method breaks it down into parts so we can access each of the values
+			//the substRing method breaks it down into parts so we can access each of the values
 			var sub1 = profileLinkColor.substring(0,2);
 			var sub2 = profileLinkColor.substring(2,4);
 			var sub3 = profileLinkColor.substring(4,6);
@@ -81,13 +79,32 @@ function setup(){
 			redcol = unhex(sub1);
 			greencol = unhex(sub2);
 			bluecol = unhex(sub3);
-			
-			
-			
-			
+
+			r = int(redcol);
+			g = int(greencol);
+			b = int(bluecol);
+
+
+			console.log(redcol);
+			console.log(greencol);
+			console.log(bluecol);
 			
 
 
+
+
+			// WE NEED TO CREATE SPRITES, COLLISIONS AND TINT IN HERE
+			birdImage = loadImage("assets/birdavatar.png");
+			tint(r,g,b);
+
+			bird = createSprite(100,100);
+			
+
+
+			bird.addImage(birdImage);
+
+			bird.setCollider("rectangle",0,0,100,100);
+			
 
 
 
@@ -105,21 +122,71 @@ function setup(){
 
 
 
+  	
+	console.log("yes");
+
+	
+
+		//loading in the images from the sprite
+
+	// var birdRectCover = createSprite(100,100,100,100);
+	// birdRectCover.shapeColor = color(redcol,greencol,bluecol);
+
+
+
+	
+	
+	console.log("RRRRRRR" + r);
+
+	
+	
+	
+
+	//here we are loading the sprites
+	
+
+
+
+
+
+	mouseCollideCircle = createSprite(30,30,30,30);
+	mouseCollideCircle.setCollider("rectangle",0,0,30,30);
+	mouseCollideCircle.debug = true;
+	// NEED TO CHANGE ONCE GROUND HAS SPRITE
+	bottomRect = createSprite(500,900,1000,300);
+	bottomRect.setCollider("rectangle",0,0,1000,300);
+	bottomRect.debug = true;
+
+
+
+	
+
 }
 
 function windowResized(){
-	centerCanvas();
+	
 
 
 }
 // end of setup
 
 function draw(){  
+	// ONLY RUN COLLISIONS WHEN THE XHR == 200 
+	// MEANING SPRITES AND HITBOXES ARE CREATED
+	if (xhr.status == 200) {
+		mouseCollideCircle.collide(bottomRect);
+		mouseCollideCircle.collide(bird);
+
+	}
 	background(200);
+
 	//fill the ellipse with the color of the profile theme
 	fill(redcol,greencol,bluecol);
+
+
 	ellipse(width/2,height/2,200,200);
-	mouseCollideCircle.collide(bottomRect);
+
+	
 	drawSprites();
 	mouseCollideCircle.position.x = mouseX;
 	mouseCollideCircle.position.y = mouseY;
@@ -131,11 +198,13 @@ function draw(){
 
 
 	}
-
+	// console.log("RRRRRRR" + r);
+	// console.log("XHR: " + xhr.status);
 	
-
-
+	
 }
+
+
 
 
 

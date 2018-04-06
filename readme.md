@@ -31,3 +31,11 @@
 ## hothothothot
 
 # ok changes
+
+
+# Scott's changes and js goodies
+
+##Working on making the window a thing. need set dimensions
+
+
+

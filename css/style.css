@@ -1,10 +1,29 @@
 body, html{
 
 	box-sizing: border-box;
+	height: 100%;
 
 }
 body{
 width: 100%;
+
+
+}
+.wrap{
+	width: 100%;
+	margin: 0;
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+
+
+}
+
+#myCanvas{
+		width: 60%;
+	
+
 
 
 }

@@ -2,29 +2,52 @@ body, html{
 
 	box-sizing: border-box;
 	height: 100%;
-
+	
 }
 body{
-width: 100%;
-
-
+	width: 100%;
+	margin: 0px;
+	padding: 0;
+	background : linear-gradient(0deg, rgba(0, 132, 180, 1) 0%, rgba(0, 144, 197, 1) 27.75%, rgba(0, 172, 237, 1) 100%);
 }
 .wrap{
 	width: 100%;
-	margin: 0;
 	display: flex;
 
 	justify-content: center;
 	align-items: center;
 
+	margin: 3vh 0 3vh 0;
 
 }
 
 #myCanvas{
-		width: 97vw;
-		height: 50vh;
+	width: 97vw;
+	height: 50vh;
 	
 
 
 
 }
+#statWrapper {
+	margin: 0 auto;
+	width: 97vw;
+	height: 10vh;
+	background-color: #C0DEED; 
+}
+#legendWrapper {
+	margin: 0 auto;
+	width: 97vw;
+	height: 20vh;
+	background-color: #C0DEED; 
+}
+
+header {
+	margin: 0 auto;
+	width: 97vw;
+}
+#logo {
+	height: 6vh;
+	margin: 2vh 0 2vh 0;
+}
+

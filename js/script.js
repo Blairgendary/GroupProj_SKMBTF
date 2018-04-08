@@ -35,6 +35,10 @@ var colorarray = [];
 
 // this section of variables is for gravity and shiz
 var gravity = 1;
+// this is the coin variable
+var coinGroup;
+var coins;
+var xchange = 0;
 
 
 
@@ -46,6 +50,7 @@ function setup(){
 	colorMode(RGB,255);
 	// centerCanvas();
 	background(200);
+	coinGroup = new Group();
 
 
 
@@ -101,11 +106,31 @@ function setup(){
 			tint(r,g,b);
 			bird = createSprite(100,100);
 			bird.addAnimation("normal", "assets/birdavatar.png");
-			bird.setCollider("rectangle",0,0,100,100);
+			bird.setCollider("rectangle",0,0,64,64);
 			bird.depth = 10;
+			bird.debug = true;
 
 			bottomRect = createSprite(200,350,500,100);
+
 			bottomRect.addImage(loadImage("assets/collisiontestsprite.png"));
+			
+
+			// it's coin creation time
+
+			for (var i = 0; i < favCount; i ++){
+				
+				coins = createSprite(xchange,30,30,30);
+				coins.addImage(loadImage("assets/coin_placeholder.png"));
+				coins.setCollider("circle",0,0,20);
+				coins.debug = true;
+				coinGroup.add(coins);
+				xchange += 2;
+				
+
+
+
+			}
+
 			
 
 
@@ -129,10 +154,7 @@ function setup(){
 
 	
 
-		//loading in the images from the sprite
-
-	// var birdRectCover = createSprite(100,100,100,100);
-	// birdRectCover.shapeColor = color(redcol,greencol,bluecol);
+	
 
 
 
@@ -144,7 +166,7 @@ function setup(){
 	
 	
 
-	//here we are loading the sprites
+
 	
 
 
@@ -176,20 +198,25 @@ function draw(){
 	// ONLY RUN COLLISIONS WHEN THE XHR == 200 
 	// MEANING SPRITES AND HITBOXES ARE CREATED
 	if (xhr.status == 200) {
-		
+		coinGroup.bounce(coinGroup);
+		coinGroup.bounce(mouseCollideCircle);
 		mouseCollideCircle.collide(bird);
 		bird.velocity.x = 0;
 	//these controls are just to test the bird collision thing that we got going on	
-	if(keyIsDown(LEFT_ARROW))
+	if(keyIsDown(LEFT_ARROW)){
 		bird.velocity.x = -5;
-	if(keyIsDown(RIGHT_ARROW))
-		bird.velocity.x = 5;
-	if(bottomRect.overlapPixel(bird.position.x, bird.position.y+30)==false)
-		bird.velocity.y += gravity;
-	while(bottomRect.overlapPixel(bird.position.x,bird.position.y+30)){
-		bird.position.y--;
-		bird.velocity.y = 0;
+		// coinGroup[0].velocity.x = -5;
 	}
+	if(keyIsDown(RIGHT_ARROW)){
+		bird.velocity.x = 5;
+		// coinGroup[0].velocity.x = 5;
+	}
+	birdOverlapGround();
+	// coinGroup[0].velocity.y += gravity;
+
+	coinsOverlapGround();
+
+	
 
 
 	}
@@ -221,6 +248,58 @@ function draw(){
 	// console.log("XHR: " + xhr.status);
 	
 	
+}
+function birdOverlapGround(){
+	// is the bird isn't overlapping with the bottom rectangle it will fall
+	if(bottomRect.overlapPixel(bird.position.x, bird.position.y+30)==false)
+		bird.velocity.y += gravity;
+	// while the bird is overlapping the pixels of the rectangle push it up until it isn't
+	while(bottomRect.overlapPixel(bird.position.x,bird.position.y+30)){
+		bird.position.y--;
+		bird.velocity.y = 0;
+	}
+
+
+
+}
+
+function coinsOverlapGround(){
+	for(var i = 0; i < coinGroup.length; i++){
+		// coinGroup[i].velocity.y += gravity;
+		if(bottomRect.overlapPixel(coinGroup[i].position.x, coinGroup[i].position.y+30)==false)
+		coinGroup[i].velocity.y += gravity;
+		// while the coin is overlapping the pixels of the rectangle push it up until it isn't
+		while(bottomRect.overlapPixel(coinGroup[i].position.x,coinGroup[i].position.y+30)){
+			coinGroup[i].position.y--;
+			coinGroup[i].velocity.y = 0;
+
+		// this will keep the coins withing the canvas
+		if(coinGroup[i].position.x < 0){
+			coinGroup[i].position.x = 0;
+	}
+		if(coinGroup[i].position.x > width){
+			coinGroup[i].position.x = width;
+
+
+	}
+
+
+
+	}
+
+
+
+
+
+}
+}
+
+function mousePressed(){
+	console.log("mouseX " + mouseX);
+	console.log("mouseY " + mouseY);
+	console.log(coinGroup);
+
+
 }
 
 

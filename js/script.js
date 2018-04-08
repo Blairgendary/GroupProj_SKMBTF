@@ -33,6 +33,9 @@ var mouseCollideCircle;
 var colorarray = [];
 
 
+// this section of variables is for gravity and shiz
+var gravity = 1;
+
 
 
 function setup(){
@@ -96,14 +99,13 @@ function setup(){
 			// WE NEED TO CREATE SPRITES, COLLISIONS AND TINT IN HERE
 			birdImage = loadImage("assets/birdavatar.png");
 			tint(r,g,b);
-
 			bird = createSprite(100,100);
-			
-
-
-			bird.addImage(birdImage);
-
+			bird.addAnimation("normal", "assets/birdavatar.png");
 			bird.setCollider("rectangle",0,0,100,100);
+			bird.depth = 10;
+
+			bottomRect = createSprite(200,350,500,100);
+			bottomRect.addImage(loadImage("assets/collisiontestsprite.png"));
 			
 
 
@@ -153,9 +155,9 @@ function setup(){
 	mouseCollideCircle.setCollider("rectangle",0,0,30,30);
 	mouseCollideCircle.debug = true;
 	// NEED TO CHANGE ONCE GROUND HAS SPRITE
-	bottomRect = createSprite(500,900,1000,300);
-	bottomRect.setCollider("rectangle",0,0,1000,300);
-	bottomRect.debug = true;
+	
+	
+	
 
 
 
@@ -174,17 +176,34 @@ function draw(){
 	// ONLY RUN COLLISIONS WHEN THE XHR == 200 
 	// MEANING SPRITES AND HITBOXES ARE CREATED
 	if (xhr.status == 200) {
-		mouseCollideCircle.collide(bottomRect);
+		
 		mouseCollideCircle.collide(bird);
+		bird.velocity.x = 0;
+	//these controls are just to test the bird collision thing that we got going on	
+	if(keyIsDown(LEFT_ARROW))
+		bird.velocity.x = -5;
+	if(keyIsDown(RIGHT_ARROW))
+		bird.velocity.x = 5;
+	if(bottomRect.overlapPixel(bird.position.x, bird.position.y+30)==false)
+		bird.velocity.y += gravity;
+	while(bottomRect.overlapPixel(bird.position.x,bird.position.y+30)){
+		bird.position.y--;
+		bird.velocity.y = 0;
+	}
+
 
 	}
+
+
+
+
 	background(200);
 
 	//fill the ellipse with the color of the profile theme
-	fill(redcol,greencol,bluecol);
+	
 
 
-	ellipse(width/2,height/2,200,200);
+	
 
 	
 	drawSprites();

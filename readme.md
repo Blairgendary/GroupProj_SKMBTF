@@ -1,32 +1,13 @@
-// Saving the Readme.md File
 
 
 
 
-# TITLE
+
+# Tweetvatar
 ### Character Representation of Twitter
+### Person will need to grab keys from twitter.
 
 
-# Butts 
-## more butts 
-
-
-## even more butts
-
-
-
-## even more butts
-
-
-
-## hothothothot
-
-# ok changes
-
-
-# Scott's changes and js goodies
-
-##Working on making the window a thing. need set dimensions
 
 
 

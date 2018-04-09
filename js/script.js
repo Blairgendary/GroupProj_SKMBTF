@@ -22,12 +22,14 @@ var canvas;
 //this will be initializing all of the sprites n shit
 var bird;
 var birdImage;
-// this is the coin variable
-var coinGroup;
-var coins;
-var xchange = 0;
+
+// these are the coin variables with their groups
+
+var thousCoinGroup, hunCoinGroup, tenCoinGroup, oneCoinGroup;
+var thousCoins, hunCoins, tenCoins, oneCoins;
+var xchange = 100;
 //this is the profile image maybe we could use it as a sprite or something
-var profileImgSprite
+var profileImgSprite;
 
 
 
@@ -55,7 +57,10 @@ function setup(){
 	colorMode(RGB,255);
 	// centerCanvas();
 	background(200);
-	coinGroup = new Group();
+	thousCoinGroup = new Group();
+	hunCoinGroup = new Group();
+	tenCoinGroup = new Group();
+	oneCoinGroup = new Group();
 
 
 
@@ -138,14 +143,72 @@ function setup(){
 
 			// it's coin creation time
 
-			for (var i = 0; i < favCount; i ++){
+			// for (var i = 0; i < favCount; i ++){
 				
-				coins = createSprite(xchange,30,30,30);
-				coins.addImage(loadImage("assets/coin_placeholder.png"));
-				coins.setCollider("circle",0,0,20);
-				coins.debug = true;
-				coinGroup.add(coins);
-				xchange += 2;
+			// 	coins = createSprite(xchange,30,30,30);
+			// 	coins.addImage(loadImage("assets/coin_placeholder.png"));
+			// 	coins.setCollider("circle",0,0,20);
+			// 	coins.debug = true;
+			// 	coinGroup.add(coins);
+			// 	xchange += 2;
+			// }
+			var favIndex = favCount;
+			for (var i = 0; i <= favIndex; i ++){
+				
+				if(favCount >= 1000){
+					thousCoins = createSprite(xchange,30,30,30);
+					thousCoins.addImage(loadImage("assets/1000coin.png"));
+					thousCoins.setCollider("circle",0,0,20);
+					thousCoins.debug = true;
+					thousCoinGroup.add(thousCoins);
+					xchange +=10;
+					favCount -= 1000;
+					console.log("1000fired");
+
+				}
+				else if(favCount >= 100 && favCount < 1000){
+					hunCoins = createSprite(xchange,30,30,30);
+					hunCoins.addImage(loadImage("assets/100coin.png"));
+					hunCoins.setCollider("circle",0,0,20);
+					hunCoins.debug = true;
+					hunCoinGroup.add(hunCoins);
+					xchange +=10;
+					favCount -= 100;
+					console.log("100fired");
+
+				}
+				else if(favCount >= 10 && favCount < 100){
+					tenCoins = createSprite(xchange,30,30,30);
+					tenCoins.addImage(loadImage("assets/10coin.png"));
+					tenCoins.setCollider("circle",0,0,20);
+					tenCoins.debug = true;
+					tenCoinGroup.add(tenCoins);
+					xchange +=10;
+					favCount -= 10;
+					console.log("10fired");
+
+
+				}
+				else if(favCount >= 1  && favCount < 10){
+					oneCoins = createSprite(xchange,30,30,30);
+					oneCoins.addImage(loadImage("assets/1coin.png"));
+					oneCoins.setCollider("circle",0,0,20);
+					oneCoins.debug = true;
+					oneCoinGroup.add(oneCoins);
+					xchange +=10;
+					favCount -= 1;
+					console.log("1fired");
+
+				}
+				
+				console.log("leftover " + favCount);
+
+				// coins = createSprite(xchange,30,30,30);
+				// coins.addImage(loadImage("assets/coin_placeholder.png"));
+				// coins.setCollider("circle",0,0,20);
+				// coins.debug = true;
+				// coinGroup.add(coins);
+				// xchange += 2;
 			}
 			
 			
@@ -173,8 +236,8 @@ function draw(){
 	// ONLY RUN COLLISIONS WHEN THE XHR == 200 
 	// MEANING SPRITES AND HITBOXES ARE CREATED
 	if (xhr.status == 200) {
-		coinGroup.collide(coinGroup);
-		coinGroup.bounce(mouseCollideCircle);
+		// coinGroup.collide(coinGroup);
+		// coinGroup.bounce(mouseCollideCircle);
 		mouseCollideCircle.collide(bird);
 		bird.velocity.x = 0;
 	//these controls are just to test the bird collision thing that we got going on	
@@ -239,40 +302,40 @@ function birdOverlapGround(){
 }
 
 function coinsOverlapGround(){
-	for(var i = 0; i < coinGroup.length; i++){
-		// coinGroup[i].velocity.y += gravity;
-		if(bottomRect.overlapPixel(coinGroup[i].position.x, coinGroup[i].position.y+30)==false)
-		coinGroup[i].velocity.y += gravity;
-		// while the coin is overlapping the pixels of the rectangle push it up until it isn't
-		while(bottomRect.overlapPixel(coinGroup[i].position.x,coinGroup[i].position.y+30)){
-			coinGroup[i].position.y--;
-			coinGroup[i].velocity.y = 0;
+// 	for(var i = 0; i < coinGroup.length; i++){
+// 		// coinGroup[i].velocity.y += gravity;
+// 		if(bottomRect.overlapPixel(coinGroup[i].position.x, coinGroup[i].position.y+30)==false)
+// 		coinGroup[i].velocity.y += gravity;
+// 		// while the coin is overlapping the pixels of the rectangle push it up until it isn't
+// 		while(bottomRect.overlapPixel(coinGroup[i].position.x,coinGroup[i].position.y+30)){
+// 			coinGroup[i].position.y--;
+// 			coinGroup[i].velocity.y = 0;
 
-		// this will keep the coins withing the canvas
-		if(coinGroup[i].position.x < 0){
-			coinGroup[i].position.x = 0;
-	}
-		if(coinGroup[i].position.x > width){
-			coinGroup[i].position.x = width;
-
-
-	}
+// 		// this will keep the coins withing the canvas
+// 		if(coinGroup[i].position.x < 0){
+// 			coinGroup[i].position.x = 0;
+// 	}
+// 		if(coinGroup[i].position.x > width){
+// 			coinGroup[i].position.x = width;
 
 
-
-	}
+// 	}
 
 
 
+// 	}
 
 
-}
+
+
+
+// }
 }
 
 function mousePressed(){
 	console.log("mouseX " + mouseX);
 	console.log("mouseY " + mouseY);
-	console.log(coinGroup);
+	
 
 }
 

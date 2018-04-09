@@ -56,7 +56,7 @@ function setup(){
 	canvas.parent("myCanvas");
 	colorMode(RGB,255);
 	// centerCanvas();
-	background(200);
+	background(0);
 	thousCoinGroup = new Group();
 	hunCoinGroup = new Group();
 	tenCoinGroup = new Group();
@@ -151,9 +151,9 @@ function setup(){
 				
 				if(favCount >= 1000){
 					thousCoins = createSprite(xchange,30,30,30);
-					thousCoins.addImage(loadImage("assets/1000coin.png"));
+					thousCoins.addImage(loadImage("assets/Twitter_Gold_Coin.png"));
 					thousCoins.setCollider("circle",0,0,20);
-					thousCoins.debug = true;
+					// thousCoins.debug = true;
 					thousCoinGroup.add(thousCoins);
 					xchange +=10;
 					favCount -= 1000;
@@ -162,9 +162,9 @@ function setup(){
 				}
 				else if(favCount >= 100 && favCount < 1000){
 					hunCoins = createSprite(xchange,30,30,30);
-					hunCoins.addImage(loadImage("assets/100coin.png"));
-					hunCoins.setCollider("circle",0,0,20);
-					hunCoins.debug = true;
+					hunCoins.addImage(loadImage("assets/Twitter_Silver_Coin.png"));
+					hunCoins.setCollider("circle",0,0,15);
+					// hunCoins.debug = true;
 					hunCoinGroup.add(hunCoins);
 					xchange +=10;
 					favCount -= 100;
@@ -173,9 +173,9 @@ function setup(){
 				}
 				else if(favCount >= 10 && favCount < 100){
 					tenCoins = createSprite(xchange,30,30,30);
-					tenCoins.addImage(loadImage("assets/10coin.png"));
-					tenCoins.setCollider("circle",0,0,20);
-					tenCoins.debug = true;
+					tenCoins.addImage(loadImage("assets/Twitter_Bronze_Coin.png"));
+					tenCoins.setCollider("circle",0,0,10);
+					// tenCoins.debug = true;
 					tenCoinGroup.add(tenCoins);
 					xchange +=10;
 					favCount -= 10;
@@ -185,9 +185,9 @@ function setup(){
 				}
 				else if(favCount >= 1  && favCount < 10){
 					oneCoins = createSprite(xchange,30,30,30);
-					oneCoins.addImage(loadImage("assets/1coin.png"));
-					oneCoins.setCollider("circle",0,0,20);
-					oneCoins.debug = true;
+					oneCoins.addImage(loadImage("assets/Twitter_Washer_Coin.png"));
+					oneCoins.setCollider("circle",0,0,5);
+					// oneCoins.debug = true;
 					oneCoinGroup.add(oneCoins);
 					xchange +=10;
 					favCount -= 1;
@@ -256,7 +256,7 @@ function draw(){
 
 
 
-	background(200);
+	background(0);
 
 	//fill the ellipse with the color of the profile theme
 	

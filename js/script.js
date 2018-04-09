@@ -137,7 +137,7 @@ function setup(){
 
 			bottomRect.addImage(loadImage("assets/Twitter_Terrain.png"));
 			bottomRect.depth = 9;
-			bottomRect.setCollider("rectangle",400,0,2000,128);
+			bottomRect.setCollider("rectangle",400,18,2000,128);
 			bottomRect.debug = true;
 
 			profileImgSprite = createSprite(100,100,50,50);
@@ -164,6 +164,7 @@ function setup(){
 					thousCoins = createSprite(xchange,30,30,30);
 					thousCoins.addImage(loadImage("assets/Twitter_Gold_Coin.png"));
 					thousCoins.setCollider("circle",0,0,20);
+					thousCoins.velocity.y += gravity;
 					// thousCoins.debug = true;
 					thousCoinGroup.add(thousCoins);
 					xchange +=10;
@@ -174,7 +175,8 @@ function setup(){
 				else if(favCount >= 100 && favCount < 1000){
 					hunCoins = createSprite(xchange,30,30,30);
 					hunCoins.addImage(loadImage("assets/Twitter_Silver_Coin.png"));
-					hunCoins.setCollider("circle",0,0,15);
+					hunCoins.setCollider("circle",0,0,12);
+					hunCoins.velocity.y += gravity;
 					// hunCoins.debug = true;
 					hunCoinGroup.add(hunCoins);
 					xchange +=10;
@@ -185,7 +187,8 @@ function setup(){
 				else if(favCount >= 10 && favCount < 100){
 					tenCoins = createSprite(xchange,30,30,30);
 					tenCoins.addImage(loadImage("assets/Twitter_Bronze_Coin.png"));
-					tenCoins.setCollider("circle",0,0,10);
+					tenCoins.setCollider("circle",0,0,8);
+					tenCoins.velocity.y += gravity;
 					// tenCoins.debug = true;
 					tenCoinGroup.add(tenCoins);
 					xchange +=10;
@@ -198,6 +201,7 @@ function setup(){
 					oneCoins = createSprite(xchange,30,30,30);
 					oneCoins.addImage(loadImage("assets/Twitter_Washer_Coin.png"));
 					oneCoins.setCollider("circle",0,0,5);
+					oneCoins.velocity.y += gravity;
 					// oneCoins.debug = true;
 					oneCoinGroup.add(oneCoins);
 					xchange +=10;
@@ -258,7 +262,50 @@ function draw(){
 	}
 	birdOverlapGround();
 	// coinGroup[0].velocity.y += gravity;
+	
+	
+	if(bottomRect.collide(thousCoinGroup)== true){
+		for(var i = 0; i < thousCoinGroup.length; i++){
+		thousCoinGroup[i].velocity.y = 0;
 
+	}
+	// this is to keep the ground posistion where it is
+	//comment out if we don't want it to
+	bottomRect.position.y -= gravity;
+
+	}
+		if(bottomRect.collide(hunCoinGroup)== true){
+		for(var i = 0; i < hunCoinGroup.length; i++){
+		hunCoinGroup[i].velocity.y = 0;
+
+	}
+	// this is to keep the ground posistion where it is
+	//comment out if we don't want it to
+	bottomRect.position.y -= gravity;
+
+	}
+		if(bottomRect.collide(tenCoinGroup)== true){
+		for(var i = 0; i < tenCoinGroup.length; i++){
+		tenCoinGroup[i].velocity.y = 0;
+
+	}
+	// this is to keep the ground posistion where it is
+	//comment out if we don't want it to
+	bottomRect.position.y -= gravity;
+
+	}
+		if(bottomRect.collide(oneCoinGroup)== true){
+		for(var i = 0; i < oneCoinGroup.length; i++){
+		oneCoinGroup[i].velocity.y = 0;
+
+	}
+	// this is to keep the ground posistion where it is
+	//comment out if we don't want it to
+	bottomRect.position.y -= gravity;
+
+	}
+
+	
 	
 
 	

@@ -122,9 +122,12 @@ function setup(){
 			
 			
 
-			bottomRect = createSprite(200,350,500,100);
+			bottomRect = createSprite(600,420,2000,128);
 
-			bottomRect.addImage(loadImage("assets/collisiontestsprite.png"));
+			bottomRect.addImage(loadImage("assets/Twitter_Terrain.png"));
+			bottomRect.depth = 9;
+			bottomRect.setCollider("rectangle",400,0,2000,128);
+			bottomRect.debug = true;
 
 			profileImgSprite = createSprite(100,100,50,50);
 			profileImgSprite.addImage(loadImage(profileImgUrl));
@@ -141,17 +144,8 @@ function setup(){
 
 
 
-			// it's coin creation time
+			// it's coin creation time  ITS BEAUTIFUL
 
-			// for (var i = 0; i < favCount; i ++){
-				
-			// 	coins = createSprite(xchange,30,30,30);
-			// 	coins.addImage(loadImage("assets/coin_placeholder.png"));
-			// 	coins.setCollider("circle",0,0,20);
-			// 	coins.debug = true;
-			// 	coinGroup.add(coins);
-			// 	xchange += 2;
-			// }
 			var favIndex = favCount;
 			for (var i = 0; i <= favIndex; i ++){
 				
@@ -201,7 +195,7 @@ function setup(){
 
 				}
 				
-				console.log("leftover " + favCount);
+				// console.log("leftover " + favCount);
 
 				// coins = createSprite(xchange,30,30,30);
 				// coins.addImage(loadImage("assets/coin_placeholder.png"));
@@ -252,7 +246,7 @@ function draw(){
 	birdOverlapGround();
 	// coinGroup[0].velocity.y += gravity;
 
-	coinsOverlapGround();
+	
 
 	
 
@@ -301,36 +295,9 @@ function birdOverlapGround(){
 
 }
 
-function coinsOverlapGround(){
-// 	for(var i = 0; i < coinGroup.length; i++){
-// 		// coinGroup[i].velocity.y += gravity;
-// 		if(bottomRect.overlapPixel(coinGroup[i].position.x, coinGroup[i].position.y+30)==false)
-// 		coinGroup[i].velocity.y += gravity;
-// 		// while the coin is overlapping the pixels of the rectangle push it up until it isn't
-// 		while(bottomRect.overlapPixel(coinGroup[i].position.x,coinGroup[i].position.y+30)){
-// 			coinGroup[i].position.y--;
-// 			coinGroup[i].velocity.y = 0;
-
-// 		// this will keep the coins withing the canvas
-// 		if(coinGroup[i].position.x < 0){
-// 			coinGroup[i].position.x = 0;
-// 	}
-// 		if(coinGroup[i].position.x > width){
-// 			coinGroup[i].position.x = width;
-
-
-// 	}
 
 
 
-// 	}
-
-
-
-
-
-// }
-}
 
 function mousePressed(){
 	console.log("mouseX " + mouseX);

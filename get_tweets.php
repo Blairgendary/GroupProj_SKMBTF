@@ -14,9 +14,11 @@ $settings = array(
 // ?screen_name=sbukkit&count=40&include_rts=true
 // 
 
+$q = $_REQUEST["q"];
+
 // these are the fields that you change for your project
 $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-$getfield = '?screen_name=Pixel_Dailies&count=20&include_rts=true';
+$getfield = '?screen_name='.$q.'&count=20&include_rts=true';
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);

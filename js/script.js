@@ -47,6 +47,9 @@ var colorarray = [];
 // this section of variables is for gravity and shiz
 var gravity = 1;
 
+// this is the dirty counter
+var counter = false;
+
 
 
 
@@ -66,13 +69,20 @@ function setup(){
 		$("#but").on("click", function(){
 		// this is to pass an AJAX request
 		query = document.getElementById("userInput").value;
+		if (counter == true) { 
+		clearArray();
+	}
 		AJXRequest();
+		counter = true; 
+
+
 		
 
 	}); 
 
 	
-	AJXRequest();
+	// AJXRequest();
+
 
 
 
@@ -362,6 +372,8 @@ function birdOverlapGround(){
 function mousePressed(){
 	console.log("mouseX " + mouseX);
 	console.log("mouseY " + mouseY);
+	console.log(thousCoinGroup[5]);
+	console.log(allSprites.length);
 	
 
 }
@@ -371,6 +383,35 @@ function AJXRequest(){
 	xhr.open("GET", "get_tweets.php?q=" + query, true);
 
 	xhr.send(null);
+	setup();
+	 
+
+
+}
+function clearArray(){
+
+
+for (var i = allSprites.length; i < allSprites.length; i++) { 
+	allSprites[allSprites.length].pop();
+}
+	
+	
+	// for(var i = thousCoinGroup; i >= thousCoinGroup.length; i--){
+	// 	console.log(thousCoinGroup[i]);
+	// 	thousCoinGroup[i].remove();
+	// }
+	// for(var i = hunCoinGroup.length; i >= hunCoinGroup.length; i--){
+	// 	hunCoinGroup[i].remove();
+	// }
+	// for(var i = tenCoinGroup.length; i >= tenCoinGroup.length; i--){
+	// 	tenCoinGroup[i].remove();
+	// }
+	// for(var i = oneCoinGroup.length; i >= oneCoinGroup.length; i--){
+	// 	oneCoinGroup[i].remove();
+	// }
+	// // for(var i = 0; i < thousCoinGroup.length; i++){
+	// // 	thousCoinGroup[i].remove();
+	// // }
 
 
 

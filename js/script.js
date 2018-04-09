@@ -31,6 +31,8 @@ var xchange = 100;
 //this is the profile image maybe we could use it as a sprite or something
 var profileImgSprite;
 
+// this is to pass an AJAX request
+var query = "Pixel_Dailies";
 
 
 
@@ -61,6 +63,16 @@ function setup(){
 	hunCoinGroup = new Group();
 	tenCoinGroup = new Group();
 	oneCoinGroup = new Group();
+		$("#but").on("click", function(){
+		// this is to pass an AJAX request
+		query = document.getElementById("userInput").value;
+		AJXRequest();
+		
+
+	}); 
+
+	
+	AJXRequest();
 
 
 
@@ -68,12 +80,11 @@ function setup(){
 
 	
 
-	xhr.open("GET", "get_tweets.php",true);
-
-	xhr.send(null);
+	
 
 
 	xhr.onload = function(){
+
 
 		if(xhr.status == 200){
 			// console.log(xhr.responseText);
@@ -227,6 +238,8 @@ function windowResized(){
 // end of setup
 
 function draw(){  
+
+
 	// ONLY RUN COLLISIONS WHEN THE XHR == 200 
 	// MEANING SPRITES AND HITBOXES ARE CREATED
 	if (xhr.status == 200) {
@@ -303,6 +316,16 @@ function mousePressed(){
 	console.log("mouseX " + mouseX);
 	console.log("mouseY " + mouseY);
 	
+
+}
+
+function AJXRequest(){
+	console.log(query);
+	xhr.open("GET", "get_tweets.php?q=" + query, true);
+
+	xhr.send(null);
+
+
 
 }
 

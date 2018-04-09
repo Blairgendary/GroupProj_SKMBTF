@@ -51,3 +51,63 @@ header {
 	margin: 2vh 0 2vh 0;
 }
 
+/*INPUT PAGE*/
+.inputWrapper{
+
+	display: grid;
+	grid-template-columns: 220px 400px 60px;
+	grid-template-rows: 60px;
+	grid-column-gap: 10px; 
+	grid-template-areas:"a b c"
+
+}
+
+.item1{grid-area: a}
+.item2{grid-area: b}
+.item3{grid-area: c}
+
+h2{
+	font-family: Lato;
+	color: white;
+	font-weight: lighter;
+	font-size: 3em;
+	margin: 0;
+	padding: 0;
+	width: 230px;
+}
+
+input[type=text] {
+	height: 50px;
+	padding-left: 40px;
+	background-image: url("../assets/aticon.png");
+	background-size: contain; 
+    background-repeat: no-repeat;
+    font-size: 2.5em;
+    font-family: Lato;
+    border: none;
+	background-color: #0084B4;
+	color: white;
+}
+input[type=text]:focus {
+	border: 3px solid white;
+    border-radius: 5px;
+}
+
+
+button{
+	margin-top: -4px;
+	border: none;
+	background-color: transparent;
+	text-decoration: none;
+	background-image: url("../assets/submitbutton.png");
+	background-size: contain; 
+    background-repeat: no-repeat;
+}
+
+button:hover {
+	background-image: url("../assets/submitbutton_hover.png");
+}
+button:active {
+	background-image: url("../assets/submitbutton_click.png");
+}
+

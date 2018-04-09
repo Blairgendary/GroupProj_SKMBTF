@@ -2,12 +2,12 @@
 
 
 
-
-	// this is to get the favorite count
-var favCount;
+// this is to get the favorite count
+var favCount, profileImgUrl, followCount, verified;
 var xhr = new XMLHttpRequest();
+
 //this is to get the colors of the them 
-// this is the profile link color
+// this is the profile link color 
 var profileLinkColor;
 //these are the profile link color fill variables
 var redcol;
@@ -22,6 +22,13 @@ var canvas;
 //this will be initializing all of the sprites n shit
 var bird;
 var birdImage;
+// this is the coin variable
+var coinGroup;
+var coins;
+var xchange = 0;
+//this is the profile image maybe we could use it as a sprite or something
+var profileImgSprite
+
 
 
 
@@ -35,10 +42,8 @@ var colorarray = [];
 
 // this section of variables is for gravity and shiz
 var gravity = 1;
-// this is the coin variable
-var coinGroup;
-var coins;
-var xchange = 0;
+
+
 
 
 
@@ -71,7 +76,13 @@ function setup(){
 			console.log(tweets);
 			console.log("working");
 			favCount = tweets[0].user.favourites_count;
+			followCount = tweets[0].user.followers_count;
+			// profileImgUrl = tweets[17].extended_entities.media[0].media_url;
+			profileImgUrl = tweets[0].user.profile_image_url;
 			console.log("favorites: " + favCount);
+			console.log("followers: " + followCount);
+			console.log(profileImgUrl);
+
 			// this accesses the profile them background color
 			//it's in hex though SHIT
 			profileLinkColor = tweets[0].user.profile_link_color;
@@ -102,6 +113,17 @@ function setup(){
 
 
 			// WE NEED TO CREATE SPRITES, COLLISIONS AND TINT IN HERE
+			// we have a problem with the tint function again 
+			
+			
+
+			bottomRect = createSprite(200,350,500,100);
+
+			bottomRect.addImage(loadImage("assets/collisiontestsprite.png"));
+
+			profileImgSprite = createSprite(100,100,50,50);
+			profileImgSprite.addImage(loadImage(profileImgUrl));
+			push();
 			birdImage = loadImage("assets/birdavatar.png");
 			tint(r,g,b);
 			bird = createSprite(100,100);
@@ -109,11 +131,10 @@ function setup(){
 			bird.setCollider("rectangle",0,0,64,64);
 			bird.depth = 10;
 			bird.debug = true;
-
-			bottomRect = createSprite(200,350,500,100);
-
-			bottomRect.addImage(loadImage("assets/collisiontestsprite.png"));
+			pop();
 			
+
+
 
 			// it's coin creation time
 
@@ -125,64 +146,18 @@ function setup(){
 				coins.debug = true;
 				coinGroup.add(coins);
 				xchange += 2;
-				
-
-
-
 			}
-
-			
-
-
-
-			
 			
 			
 	}
 
 
-
-
-
 }
-
-
-
-
-  	
-	console.log("yes");
-
-	
-
-	
-
-
-
-	
-	
-	console.log("RRRRRRR" + r);
-
-	
-	
-	
-
-
-	
-
-
-
-
 
 	mouseCollideCircle = createSprite(30,30,30,30);
 	mouseCollideCircle.setCollider("rectangle",0,0,30,30);
 	mouseCollideCircle.debug = true;
 	// NEED TO CHANGE ONCE GROUND HAS SPRITE
-	
-	
-	
-
-
-
 	
 
 }
@@ -198,7 +173,7 @@ function draw(){
 	// ONLY RUN COLLISIONS WHEN THE XHR == 200 
 	// MEANING SPRITES AND HITBOXES ARE CREATED
 	if (xhr.status == 200) {
-		coinGroup.bounce(coinGroup);
+		coinGroup.collide(coinGroup);
 		coinGroup.bounce(mouseCollideCircle);
 		mouseCollideCircle.collide(bird);
 		bird.velocity.x = 0;
@@ -298,7 +273,6 @@ function mousePressed(){
 	console.log("mouseX " + mouseX);
 	console.log("mouseY " + mouseY);
 	console.log(coinGroup);
-
 
 }
 

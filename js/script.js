@@ -47,9 +47,6 @@ var colorarray = [];
 // this section of variables is for gravity and shiz
 var gravity = 1;
 
-// this is the dirty counter
-var counter = false;
-
 
 
 
@@ -69,20 +66,13 @@ function setup(){
 		$("#but").on("click", function(){
 		// this is to pass an AJAX request
 		query = document.getElementById("userInput").value;
-		if (counter == true) { 
-		clearArray();
-	}
 		AJXRequest();
-		counter = true; 
-
-
 		
 
 	}); 
 
 	
-	// AJXRequest();
-
+	AJXRequest();
 
 
 
@@ -147,7 +137,7 @@ function setup(){
 
 			bottomRect.addImage(loadImage("assets/Twitter_Terrain.png"));
 			bottomRect.depth = 9;
-			bottomRect.setCollider("rectangle",400,18,2000,128);
+			bottomRect.setCollider("rectangle",400,0,2000,128);
 			bottomRect.debug = true;
 
 			profileImgSprite = createSprite(100,100,50,50);
@@ -174,7 +164,6 @@ function setup(){
 					thousCoins = createSprite(xchange,30,30,30);
 					thousCoins.addImage(loadImage("assets/Twitter_Gold_Coin.png"));
 					thousCoins.setCollider("circle",0,0,20);
-					thousCoins.velocity.y += gravity;
 					// thousCoins.debug = true;
 					thousCoinGroup.add(thousCoins);
 					xchange +=10;
@@ -185,8 +174,7 @@ function setup(){
 				else if(favCount >= 100 && favCount < 1000){
 					hunCoins = createSprite(xchange,30,30,30);
 					hunCoins.addImage(loadImage("assets/Twitter_Silver_Coin.png"));
-					hunCoins.setCollider("circle",0,0,12);
-					hunCoins.velocity.y += gravity;
+					hunCoins.setCollider("circle",0,0,15);
 					// hunCoins.debug = true;
 					hunCoinGroup.add(hunCoins);
 					xchange +=10;
@@ -197,8 +185,7 @@ function setup(){
 				else if(favCount >= 10 && favCount < 100){
 					tenCoins = createSprite(xchange,30,30,30);
 					tenCoins.addImage(loadImage("assets/Twitter_Bronze_Coin.png"));
-					tenCoins.setCollider("circle",0,0,8);
-					tenCoins.velocity.y += gravity;
+					tenCoins.setCollider("circle",0,0,10);
 					// tenCoins.debug = true;
 					tenCoinGroup.add(tenCoins);
 					xchange +=10;
@@ -211,7 +198,6 @@ function setup(){
 					oneCoins = createSprite(xchange,30,30,30);
 					oneCoins.addImage(loadImage("assets/Twitter_Washer_Coin.png"));
 					oneCoins.setCollider("circle",0,0,5);
-					oneCoins.velocity.y += gravity;
 					// oneCoins.debug = true;
 					oneCoinGroup.add(oneCoins);
 					xchange +=10;
@@ -272,50 +258,7 @@ function draw(){
 	}
 	birdOverlapGround();
 	// coinGroup[0].velocity.y += gravity;
-	
-	
-	if(bottomRect.collide(thousCoinGroup)== true){
-		for(var i = 0; i < thousCoinGroup.length; i++){
-		thousCoinGroup[i].velocity.y = 0;
 
-	}
-	// this is to keep the ground posistion where it is
-	//comment out if we don't want it to
-	bottomRect.position.y -= gravity;
-
-	}
-		if(bottomRect.collide(hunCoinGroup)== true){
-		for(var i = 0; i < hunCoinGroup.length; i++){
-		hunCoinGroup[i].velocity.y = 0;
-
-	}
-	// this is to keep the ground posistion where it is
-	//comment out if we don't want it to
-	bottomRect.position.y -= gravity;
-
-	}
-		if(bottomRect.collide(tenCoinGroup)== true){
-		for(var i = 0; i < tenCoinGroup.length; i++){
-		tenCoinGroup[i].velocity.y = 0;
-
-	}
-	// this is to keep the ground posistion where it is
-	//comment out if we don't want it to
-	bottomRect.position.y -= gravity;
-
-	}
-		if(bottomRect.collide(oneCoinGroup)== true){
-		for(var i = 0; i < oneCoinGroup.length; i++){
-		oneCoinGroup[i].velocity.y = 0;
-
-	}
-	// this is to keep the ground posistion where it is
-	//comment out if we don't want it to
-	bottomRect.position.y -= gravity;
-
-	}
-
-	
 	
 
 	
@@ -372,8 +315,6 @@ function birdOverlapGround(){
 function mousePressed(){
 	console.log("mouseX " + mouseX);
 	console.log("mouseY " + mouseY);
-	console.log(thousCoinGroup[5]);
-	console.log(allSprites.length);
 	
 
 }
@@ -383,35 +324,6 @@ function AJXRequest(){
 	xhr.open("GET", "get_tweets.php?q=" + query, true);
 
 	xhr.send(null);
-	setup();
-	 
-
-
-}
-function clearArray(){
-
-
-for (var i = allSprites.length; i < allSprites.length; i++) { 
-	allSprites[allSprites.length].pop();
-}
-	
-	
-	// for(var i = thousCoinGroup; i >= thousCoinGroup.length; i--){
-	// 	console.log(thousCoinGroup[i]);
-	// 	thousCoinGroup[i].remove();
-	// }
-	// for(var i = hunCoinGroup.length; i >= hunCoinGroup.length; i--){
-	// 	hunCoinGroup[i].remove();
-	// }
-	// for(var i = tenCoinGroup.length; i >= tenCoinGroup.length; i--){
-	// 	tenCoinGroup[i].remove();
-	// }
-	// for(var i = oneCoinGroup.length; i >= oneCoinGroup.length; i--){
-	// 	oneCoinGroup[i].remove();
-	// }
-	// // for(var i = 0; i < thousCoinGroup.length; i++){
-	// // 	thousCoinGroup[i].remove();
-	// // }
 
 
 

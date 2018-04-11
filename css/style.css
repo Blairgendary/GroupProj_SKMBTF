@@ -31,15 +31,91 @@ body{
 }
 #statWrapper {
 	margin: 0 auto;
+	padding-top: 20px;
 	width: 97vw;
-	height: 10vh;
-	background-color: #C0DEED; 
+	height: 5vh;
+	/*background-color: #C0DEED;*/ 
 }
 #legendWrapper {
 	margin: 0 auto;
 	width: 97vw;
 	height: 20vh;
-	background-color: #C0DEED; 
+/*	background-color: #C0DEED;*/ 
+
+	display: grid;
+	grid-template-columns: 50px 1fr 50px 1fr;
+	grid-template-rows: repeat(4, 1fr);
+	grid-template-areas: "gold goldLeg red redLeg"
+						 "silver silverLeg blue blueLeg"
+						 "bronze bronzeLeg green greenLeg"
+						 "washer washerLeg purple purpleLeg"
+
+}
+#legendWrapper>div {
+	background-position: 50% 50%;
+}
+
+h3{
+	font-family: Lato;
+	color: white;
+}
+
+.item4{grid-area: gold}
+.item5{grid-area: silver}
+.item6{grid-area: bronze}
+.item7{grid-area: washer}
+.item8{grid-area: red}
+.item9{grid-area: blue}
+.item10{grid-area: green}
+.item11{grid-area: purple}
+.item12{grid-area: goldLeg}
+.item13{grid-area: silverLeg}
+.item14{grid-area: bronzeLeg}
+.item15{grid-area: washerLeg}
+.item16{grid-area: redLeg}
+.item17{grid-area: blueLeg}
+.item18{grid-area: greenLeg}
+.item19{grid-area: purpleLeg}
+
+.goldCoin{
+	background: url(../assets/Twitter_Gold_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.silverCoin{
+	background: url(../assets/Twitter_Silver_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.bronzeCoin{
+	background: url(../assets/Twitter_Bronze_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.washerCoin{
+	background: url(../assets/Twitter_Washer_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.redCoin{
+	background: url(../assets/Twitter_Red_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.blueCoin{
+	background: url(../assets/Twitter_Blue_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.greenCoin{
+	background: url(../assets/Twitter_Green_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+.purpleCoin{
+	background: url(../assets/Twitter_Purple_Coin.png);
+	background-repeat: no-repeat;
+	background-position: center left;
 }
 
 header {
@@ -51,15 +127,13 @@ header {
 	margin: 2vh 0 2vh 0;
 }
 
-/*INPUT PAGE*/
 .inputWrapper{
 
 	display: grid;
-	grid-template-columns: 220px 400px 60px;
-	grid-template-rows: 60px;
+	grid-template-columns: 150px 400px 60px;
+	grid-template-rows: 40px;
 	grid-column-gap: 10px; 
 	grid-template-areas:"a b c"
-
 }
 
 .item1{grid-area: a}
@@ -70,19 +144,18 @@ h2{
 	font-family: Lato;
 	color: white;
 	font-weight: lighter;
-	font-size: 3em;
+	font-size: 2em;
 	margin: 0;
 	padding: 0;
-	width: 230px;
 }
 
 input[type=text] {
-	height: 50px;
-	padding-left: 40px;
+	height: 40px;
+	padding-left: 35px;
 	background-image: url("../assets/aticon.png");
 	background-size: contain; 
     background-repeat: no-repeat;
-    font-size: 2.5em;
+    font-size: 2em;
     font-family: Lato;
     border: none;
 	background-color: #0084B4;
@@ -95,13 +168,12 @@ input[type=text]:focus {
 
 
 button{
-	margin-top: -4px;
 	border: none;
 	background-color: transparent;
-	text-decoration: none;
 	background-image: url("../assets/submitbutton.png");
 	background-size: contain; 
     background-repeat: no-repeat;
+
 }
 
 button:hover {
